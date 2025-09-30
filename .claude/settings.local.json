@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Lakshitaa/AppData/Local/Microsoft/Windows/INetCookies/Downloads/rezinix-new/rezinix-new/**)",
+      "Bash(find:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
