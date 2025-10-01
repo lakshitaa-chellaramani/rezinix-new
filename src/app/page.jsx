@@ -81,6 +81,7 @@ const LandingPage = () => {
               <button onClick={() => scrollToSection('hero')} className="text-white hover:text-orange-400 transition-colors duration-200">Home</button>
               <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-white transition-colors duration-200">About</button>
               <a href="/solutions" className="text-gray-300 hover:text-white transition-colors duration-200">Our Solutions</a>
+              <a href="/team" className="text-gray-300 hover:text-white transition-colors duration-200">Team</a>
               <button onClick={() => scrollToSection('custom-services')} className="text-gray-300 hover:text-white transition-colors duration-200">Custom Services</button>
               <button onClick={() => scrollToSection('expertise')} className="text-gray-300 hover:text-white transition-colors duration-200">Expertise</button>
               <button onClick={() => scrollToSection('technology')} className="text-gray-300 hover:text-white transition-colors duration-200">Technology</button>
@@ -101,7 +102,8 @@ const LandingPage = () => {
               <div className="px-8 py-4 flex flex-col space-y-4">
                 <button onClick={() => scrollToSection('hero')} className="text-left text-white hover:text-orange-400 transition-colors duration-200 py-2">Home</button>
                 <button onClick={() => scrollToSection('about')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">About</button>
-                <a href="/rezi/solutions" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Our Solutions</a>
+                <a href="/solutions" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Our Solutions</a>
+                <a href="/team" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Team</a>
                 <button onClick={() => scrollToSection('custom-services')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Custom Services</button>
                 <button onClick={() => scrollToSection('expertise')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Expertise</button>
                 <button onClick={() => scrollToSection('technology')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Technology</button>
