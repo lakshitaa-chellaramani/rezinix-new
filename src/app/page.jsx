@@ -51,7 +51,7 @@ const LandingPage = () => {
       {/* Hero Section */}
       <div
         id="hero"
-        className="min-h-screen bg-black text-white relative overflow-hidden pt-20"
+        className="min-h-screen bg-black text-white relative overflow-hidden pt-16 md:pt-20"
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -70,21 +70,54 @@ const LandingPage = () => {
           }
         }}
       >
-        {/* LaserFlow Background */}
-        <div className="absolute inset-0" style={{ height: '100%' }}>
+        {/* Mobile Gradient Background */}
+        <div className="absolute inset-0 lg:hidden bg-black">
+          {/* Primary radial gradient */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[120px]"></div>
+
+          {/* Secondary accent gradients */}
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-orange-600/10 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-1/4 left-0 w-[250px] h-[250px] bg-orange-500/15 rounded-full blur-[90px]"></div>
+
+          {/* Subtle overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
+
+          {/* Refined grid pattern */}
+          <div className="absolute inset-0 opacity-[0.015]"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(249, 115, 22, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(249, 115, 22, 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '80px 80px'
+            }}>
+          </div>
+
+          {/* Subtle noise texture for depth */}
+          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+            style={{
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")'
+            }}>
+          </div>
+        </div>
+
+        {/* LaserFlow Background - Desktop Only */}
+        <div className="absolute inset-0 w-full h-full hidden lg:block">
           <LaserFlow
             horizontalBeamOffset={0.0}
-            verticalBeamOffset={-0.35}
+            verticalBeamOffset={-0.25}
             color="#f97316"
             fogIntensity={0.6}
             wispIntensity={6.0}
+            verticalSizing={1.8}
+            horizontalSizing={0.6}
           />
         </div>
 
-        {/* Technologies Background Image for Reveal */}
+        {/* Technologies Background Image for Reveal - Desktop Only */}
         <div
           ref={revealRef}
-          className="absolute top-0 left-0 w-full h-full pointer-events-none z-[5]"
+          className="hidden lg:block absolute top-0 left-0 w-full h-full pointer-events-none z-[5]"
           style={{
             '--mx': '-9999px',
             '--my': '-9999px',
@@ -97,7 +130,7 @@ const LandingPage = () => {
           }}
         >
           {/* Tech Stack Pattern - Full Coverage */}
-          <div className="absolute inset-0 grid grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-x-12 gap-y-16 px-8 py-12 content-evenly opacity-60">
+          <div className="absolute inset-0 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-10 md:gap-x-10 md:gap-y-12 lg:gap-x-12 lg:gap-y-16 px-4 sm:px-6 md:px-8 py-8 md:py-12 content-evenly opacity-60">
             {[
               { name: 'React', icon: Code },
               { name: 'TensorFlow', icon: Brain },
@@ -149,15 +182,15 @@ const LandingPage = () => {
               return (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center gap-2.5 text-white font-medium text-xs md:text-sm"
+                  className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 md:gap-2.5 text-white font-medium text-[10px] xs:text-xs md:text-sm"
                   style={{
                     transform: `rotate(${(i % 4) * 1.2 - 1.8}deg)`,
                   }}
                 >
-                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 flex items-center justify-center backdrop-blur-sm">
-                    <TechIcon className="w-4 h-4 md:w-5 md:h-5 text-orange-500" strokeWidth={2} />
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-md md:rounded-lg bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 flex items-center justify-center backdrop-blur-sm">
+                    <TechIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-4.5 md:h-4.5 lg:w-5 lg:h-5 text-orange-500" strokeWidth={2} />
                   </div>
-                  <span className="text-white/90">{tech.name}</span>
+                  <span className="text-white/90 text-center leading-tight">{tech.name}</span>
                 </div>
               );
             })}
@@ -166,13 +199,13 @@ const LandingPage = () => {
 
         {/* Fixed Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-6 flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center">
               <img
                 src="/logo.png"
                 alt="Rezinix Logo"
-                className="h-10 w-auto cursor-pointer"
+                className="h-8 sm:h-9 md:h-10 w-auto cursor-pointer"
                 onClick={() => scrollToSection('hero')}
               />
             </div>
@@ -200,7 +233,7 @@ const LandingPage = () => {
           {/* Mobile Menu */}
           {mobileMenuOpen && (
             <div className="lg:hidden bg-black/95 backdrop-blur-md border-t border-gray-800">
-              <div className="px-8 py-4 flex flex-col space-y-4">
+              <div className="px-4 sm:px-6 md:px-8 py-4 flex flex-col space-y-3 sm:space-y-4">
                 <button onClick={() => scrollToSection('hero')} className="text-left text-white hover:text-orange-400 transition-colors duration-200 py-2">Home</button>
                 <button onClick={() => scrollToSection('about')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">About</button>
                 <a href="/solutions" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Our Solutions</a>
@@ -214,7 +247,7 @@ const LandingPage = () => {
         </nav>
 
         {/* Main Hero Content */}
-        <div className="relative z-10 px-8 pt-20 pb-20 flex items-center justify-center min-h-screen">
+        <div className="relative z-10 px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-24 lg:pt-20 pb-20 sm:pb-24 md:pb-20 flex items-center justify-center min-h-screen">
           <div className="max-w-7xl mx-auto w-full">
             {/* Main Headline */}
             <div className="text-center">
@@ -222,20 +255,20 @@ const LandingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="mb-8"
+                className="mb-6 sm:mb-8"
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                  Start your <span className="text-orange-500">AI PoC</span>
-                  <br />
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 sm:mb-6 px-2">
+                  Start your <span className="text-orange-500">AI Journey</span>
+                  <br className="hidden sm:block" />
+                  <span className="sm:hidden"> </span>
                   with Rezinix
                 </h1>
               </motion.div>
-
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-12"
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white max-w-4xl mx-auto leading-relaxed mb-10 sm:mb-12 md:mb-14 px-2"
               >
                 We deliver cutting-edge AI solutions that transform businesses, enhance customer experiences, and unlock new growth opportunities
               </motion.p>
@@ -245,12 +278,12 @@ const LandingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
               >
-                <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200">
+                <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-lg font-semibold text-lg sm:text-xl transition-all duration-200 shadow-lg hover:shadow-orange-500/50">
                   Get Started
                 </button>
-                <button className="border border-gray-700 hover:border-orange-500 text-white px-8 py-4 rounded-lg font-medium text-lg transition-all duration-200">
+                <button className="w-full sm:w-auto border-2 border-gray-700 hover:border-orange-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-lg font-medium text-lg sm:text-xl transition-all duration-200">
                   Learn More
                 </button>
               </motion.div>
@@ -491,7 +524,7 @@ const LandingPage = () => {
             <div className="text-center">
               <button
                 onClick={() => toggleSection('about')}
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors duration-200 px-6 py-3 border border-gray-800 hover:border-orange-500/30 rounded-lg"
+                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200"
               >
                 {expandedSections.about ? (
                   <>
@@ -500,7 +533,7 @@ const LandingPage = () => {
                   </>
                 ) : (
                   <>
-                    <span>See What We Do</span>
+                    <span>Read More</span>
                     <ChevronDown size={20} />
                   </>
                 )}
