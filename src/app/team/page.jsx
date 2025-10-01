@@ -39,7 +39,7 @@ const TeamPage = () => {
     {
       name: "Nitin Sawant",
       title: "Senior Technology Advisor",
-      image: "https://rezinix.ai/images/2025-05-nitin-sawant-1.webp",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQFTCmVVe7wlEQ/profile-displayphoto-scale_200_200/B4DZi479ZJGgAc-/0/1755449383301?e=1762387200&v=beta&t=X5YO3OoTJ0eIyR7nrt-bOslLvgg0WilSgIxHhgPG0yA",
       location: "Global / Remote",
       experience: "25+ years",
       linkedin: "https://www.linkedin.com/in/nitin-sawant/?originalSubdomain=in",

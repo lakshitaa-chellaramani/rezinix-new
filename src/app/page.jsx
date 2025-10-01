@@ -1,7 +1,9 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronDown, ChevronUp, Menu, X, Sparkles, Zap, TrendingUp, Brain, Users, Shield, Settings, BookOpen, Camera, Code, MessageSquare, Cpu, Cloud, Palette, Search, Briefcase, Bot, BarChart3, Smartphone, Link, Cog } from 'lucide-react';
 import { motion } from 'framer-motion';
+import LaserFlow from '../components/LaserFlow';
+import GlareHover from '../components/GlareHover';
 import DesignForDesigners from './SectionTwo';
 import StatsSection from './StatsSection';
 import PricingSection from './PricingSection';
@@ -12,6 +14,7 @@ import Footer from './Footer';
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const revealRef = useRef(null);
   const [expandedSections, setExpandedSections] = useState({
     about: true,
     customServices: false,
@@ -46,20 +49,118 @@ const LandingPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div id="hero" className="min-h-screen bg-black text-white relative overflow-hidden pt-20">
-        {/* Professional gradient background */}
-        <div className="absolute inset-0">
-          {/* Subtle gradient overlays */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-l from-orange-500/10 to-transparent opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-orange-500/8 to-transparent opacity-40"></div>
+      <div
+        id="hero"
+        className="min-h-screen bg-black text-white relative overflow-hidden pt-20"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const el = revealRef.current;
+          if (el) {
+            el.style.setProperty('--mx', `${x}px`);
+            el.style.setProperty('--my', `${y + rect.height * 0.5}px`);
+          }
+        }}
+        onMouseLeave={() => {
+          const el = revealRef.current;
+          if (el) {
+            el.style.setProperty('--mx', '-9999px');
+            el.style.setProperty('--my', '-9999px');
+          }
+        }}
+      >
+        {/* LaserFlow Background */}
+        <div className="absolute inset-0" style={{ height: '100%' }}>
+          <LaserFlow
+            horizontalBeamOffset={0.0}
+            verticalBeamOffset={-0.35}
+            color="#f97316"
+            fogIntensity={0.6}
+            wispIntensity={6.0}
+          />
+        </div>
 
-          {/* Subtle grid pattern */}
-          <div className="absolute inset-0 opacity-[0.015]"
-            style={{
-              backgroundImage: `linear-gradient(rgba(249, 115, 22, 0.2) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(249, 115, 22, 0.2) 1px, transparent 1px)`,
-              backgroundSize: '80px 80px'
-            }}>
+        {/* Technologies Background Image for Reveal */}
+        <div
+          ref={revealRef}
+          className="absolute top-0 left-0 w-full h-full pointer-events-none z-[5]"
+          style={{
+            '--mx': '-9999px',
+            '--my': '-9999px',
+            WebkitMaskImage: 'radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 100px, rgba(255,255,255,0.6) 180px, rgba(255,255,255,0.25) 260px, rgba(255,255,255,0) 340px)',
+            maskImage: 'radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 100px, rgba(255,255,255,0.6) 180px, rgba(255,255,255,0.25) 260px, rgba(255,255,255,0) 340px)',
+            WebkitMaskRepeat: 'no-repeat',
+            maskRepeat: 'no-repeat',
+            mixBlendMode: 'lighten',
+            opacity: 0.6
+          }}
+        >
+          {/* Tech Stack Pattern - Full Coverage */}
+          <div className="absolute inset-0 grid grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-x-12 gap-y-16 px-8 py-12 content-evenly opacity-60">
+            {[
+              { name: 'React', icon: Code },
+              { name: 'TensorFlow', icon: Brain },
+              { name: 'PyTorch', icon: Cpu },
+              { name: 'AWS', icon: Cloud },
+              { name: 'Azure', icon: Cloud },
+              { name: 'GCP', icon: Cloud },
+              { name: 'Python', icon: Code },
+              { name: 'Node.js', icon: Zap },
+              { name: 'Docker', icon: Cog },
+              { name: 'Kubernetes', icon: Settings },
+              { name: 'OpenAI', icon: Sparkles },
+              { name: 'LangChain', icon: Link },
+              { name: 'Databricks', icon: BarChart3 },
+              { name: 'Snowflake', icon: Cloud },
+              { name: 'MongoDB', icon: Cog },
+              { name: 'PostgreSQL', icon: Cog },
+              { name: 'Hadoop', icon: BarChart3 },
+              { name: 'Spark', icon: Zap },
+              { name: 'Kafka', icon: TrendingUp },
+              { name: 'Redis', icon: Zap },
+              { name: 'FastAPI', icon: Code },
+              { name: 'GraphQL', icon: Link },
+              { name: 'TypeScript', icon: Code },
+              { name: 'Next.js', icon: Code },
+              { name: 'Flutter', icon: Smartphone },
+              { name: 'React Native', icon: Smartphone },
+              { name: 'Angular', icon: Code },
+              { name: 'Vue.js', icon: Code },
+              { name: 'Tailwind', icon: Palette },
+              { name: 'Terraform', icon: Settings },
+              { name: 'Jenkins', icon: Cog },
+              { name: 'GitHub', icon: Code },
+              { name: 'Vercel', icon: Cloud },
+              { name: 'Supabase', icon: Cog },
+              { name: 'Prisma', icon: Cog },
+              { name: 'Django', icon: Code },
+              { name: 'Flask', icon: Code },
+              { name: 'Spring', icon: Code },
+              { name: 'Golang', icon: Code },
+              { name: 'Rust', icon: Code },
+              { name: 'Elasticsearch', icon: Search },
+              { name: 'Nginx', icon: Settings },
+              { name: 'Apache', icon: Settings },
+              { name: 'MySQL', icon: Cog },
+              { name: 'Figma', icon: Palette }
+            ].map((tech, i) => {
+              const TechIcon = tech.icon;
+              return (
+                <div
+                  key={i}
+                  className="flex flex-col items-center justify-center gap-2.5 text-white font-medium text-xs md:text-sm"
+                  style={{
+                    transform: `rotate(${(i % 4) * 1.2 - 1.8}deg)`,
+                  }}
+                >
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 flex items-center justify-center backdrop-blur-sm">
+                    <TechIcon className="w-4 h-4 md:w-5 md:h-5 text-orange-500" strokeWidth={2} />
+                  </div>
+                  <span className="text-white/90">{tech.name}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -113,10 +214,10 @@ const LandingPage = () => {
         </nav>
 
         {/* Main Hero Content */}
-        <div className="relative z-10 px-8 pt-20 pb-16">
-          <div className="max-w-7xl mx-auto">
+        <div className="relative z-10 px-8 pt-20 pb-20 flex items-center justify-center min-h-screen">
+          <div className="max-w-7xl mx-auto w-full">
             {/* Main Headline */}
-            <div className="text-center mb-16">
+            <div className="text-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -134,7 +235,7 @@ const LandingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl lg:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-12"
+                className="text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-12"
               >
                 We deliver cutting-edge AI solutions that transform businesses, enhance customer experiences, and unlock new growth opportunities
               </motion.p>
@@ -156,6 +257,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
+
 
         {/* Bottom Stats */}
         {/* <motion.div
@@ -278,13 +380,32 @@ const LandingPage = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm border border-gray-800 hover:border-orange-500/30 p-6 rounded-xl transition-all duration-300"
                     >
-                      <div className="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg flex items-center justify-center mb-4 border border-orange-500/20">
-                        <IconComponent className="w-6 h-6 text-orange-500" />
-                      </div>
-                      <h3 className="text-white font-semibold text-base mb-2">{item.title}</h3>
-                      <p className="text-gray-400 text-sm">{item.description}</p>
+                      <GlareHover
+                        width="100%"
+                        height="100%"
+                        background="linear-gradient(135deg, rgba(17, 17, 17, 0.9) 0%, rgba(26, 26, 26, 0.8) 100%)"
+                        borderRadius="12px"
+                        borderColor="rgb(55, 65, 81)"
+                        glareColor="#f97316"
+                        glareOpacity={0.4}
+                        glareAngle={-45}
+                        glareSize={350}
+                        transitionDuration={800}
+                        playOnce={false}
+                        className="backdrop-blur-sm hover:border-orange-500/50 transition-all duration-300"
+                        style={{
+                          padding: '1.5rem'
+                        }}
+                      >
+                        <div className="flex flex-col h-full">
+                          <div className="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg flex items-center justify-center mb-4 border border-orange-500/20">
+                            <IconComponent className="w-6 h-6 text-orange-500" />
+                          </div>
+                          <h3 className="text-white font-semibold text-base mb-2">{item.title}</h3>
+                          <p className="text-gray-400 text-sm">{item.description}</p>
+                        </div>
+                      </GlareHover>
                     </motion.div>
                   );
                 })}
@@ -329,17 +450,36 @@ const LandingPage = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.05 }}
                         viewport={{ once: true }}
-                        className="bg-gradient-to-br from-gray-900/80 to-gray-800/60 backdrop-blur-sm rounded-xl p-6 border border-gray-800 hover:border-orange-500/30 transition-all duration-300"
                       >
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 border ${
-                          isOrange
-                            ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-500/20'
-                            : 'bg-gradient-to-br from-gray-700/20 to-gray-800/10 border-gray-700/20'
-                        }`}>
-                          <ServiceIcon className={`w-6 h-6 ${isOrange ? 'text-orange-500' : 'text-gray-400'}`} />
-                        </div>
-                        <h3 className="text-base font-bold text-white mb-2">{service.title}</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                        <GlareHover
+                          width="100%"
+                          height="100%"
+                          background="#000000"
+                          borderRadius="12px"
+                          borderColor="rgb(31, 41, 55)"
+                          glareColor="#f97316"
+                          glareOpacity={0.35}
+                          glareAngle={-45}
+                          glareSize={400}
+                          transitionDuration={1200}
+                          playOnce={false}
+                          className="backdrop-blur-sm hover:border-orange-500/40 transition-all duration-300"
+                          style={{
+                            padding: '1.5rem'
+                          }}
+                        >
+                          <div className="flex flex-col h-full">
+                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 border ${
+                              isOrange
+                                ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-500/20'
+                                : 'bg-gradient-to-br from-gray-700/20 to-gray-800/10 border-gray-700/20'
+                            }`}>
+                              <ServiceIcon className={`w-6 h-6 ${isOrange ? 'text-orange-500' : 'text-gray-400'}`} />
+                            </div>
+                            <h3 className="text-base font-bold text-white mb-2">{service.title}</h3>
+                            <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                          </div>
+                        </GlareHover>
                       </motion.div>
                     );
                   })}
