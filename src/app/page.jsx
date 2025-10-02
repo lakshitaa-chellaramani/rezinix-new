@@ -198,51 +198,109 @@ const LandingPage = () => {
         </div>
 
         {/* Fixed Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-6 flex justify-between items-center">
-            {/* Logo */}
-            <div className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="Rezinix Logo"
-                className="h-8 sm:h-9 md:h-10 w-auto cursor-pointer"
-                onClick={() => scrollToSection('hero')}
-              />
-            </div>
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-lg border-b border-gray-800/50 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+            <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
+              {/* Logo */}
+              <div className="flex items-center flex-shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Rezinix Logo"
+                  className="h-7 sm:h-8 md:h-9 lg:h-10 w-auto cursor-pointer"
+                  onClick={() => scrollToSection('hero')}
+                />
+              </div>
 
-            {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('hero')} className="text-white hover:text-orange-400 transition-colors duration-200">Home</button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-white transition-colors duration-200">About</button>
-              <a href="/solutions" className="text-gray-300 hover:text-white transition-colors duration-200">Our Solutions</a>
-              <a href="/team" className="text-gray-300 hover:text-white transition-colors duration-200">Team</a>
-              <button onClick={() => scrollToSection('custom-services')} className="text-gray-300 hover:text-white transition-colors duration-200">Custom Services</button>
-              <button onClick={() => scrollToSection('expertise')} className="text-gray-300 hover:text-white transition-colors duration-200">Expertise</button>
-              <button onClick={() => scrollToSection('technology')} className="text-gray-300 hover:text-white transition-colors duration-200">Technology</button>
-            </div>
+              {/* Desktop Navigation Links */}
+              <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                <button onClick={() => scrollToSection('hero')} className="text-white hover:text-orange-400 transition-colors duration-200 font-medium text-sm xl:text-base">Home</button>
+                <button onClick={() => scrollToSection('expertise')} className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">Expertise</button>
+                <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">About</button>
+                <a href="/solutions" className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">Solutions</a>
+                <a href="/team" className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">Team</a>
+                <button onClick={() => scrollToSection('custom-services')} className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">Services</button>
+                <button onClick={() => scrollToSection('technology')} className="text-gray-300 hover:text-white transition-colors duration-200 font-medium text-sm xl:text-base">Technology</button>
+              </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden text-white"
+              {/* Mobile Menu Button */}
+              <button
+                className="lg:hidden text-white p-2 rounded-lg hover:bg-gray-800/50 transition-colors duration-200"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="lg:hidden bg-black/95 backdrop-blur-md border-t border-gray-800">
-              <div className="px-4 sm:px-6 md:px-8 py-4 flex flex-col space-y-3 sm:space-y-4">
-                <button onClick={() => scrollToSection('hero')} className="text-left text-white hover:text-orange-400 transition-colors duration-200 py-2">Home</button>
-                <button onClick={() => scrollToSection('about')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">About</button>
-                <a href="/solutions" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Our Solutions</a>
-                <a href="/team" className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Team</a>
-                <button onClick={() => scrollToSection('custom-services')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Custom Services</button>
-                <button onClick={() => scrollToSection('expertise')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Expertise</button>
-                <button onClick={() => scrollToSection('technology')} className="text-left text-gray-300 hover:text-white transition-colors duration-200 py-2">Technology</button>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden bg-black/98 backdrop-blur-lg border-t border-gray-800/50 shadow-2xl"
+            >
+              <div className="px-4 sm:px-6 md:px-8 py-6 flex flex-col space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
+                <button
+                  onClick={() => {
+                    scrollToSection('hero');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-left text-white hover:text-orange-400 hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base"
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('expertise');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base"
+                >
+                  Expertise
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('about');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base"
+                >
+                  About
+                </button>
+                <a
+                  href="/solutions"
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base block"
+                >
+                  Solutions
+                </a>
+                <a
+                  href="/team"
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base block"
+                >
+                  Team
+                </a>
+                <button
+                  onClick={() => {
+                    scrollToSection('custom-services');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base"
+                >
+                  Services
+                </button>
+                <button
+                  onClick={() => {
+                    scrollToSection('technology');
+                    setMobileMenuOpen(false);
+                  }}
+                  className="text-left text-gray-300 hover:text-white hover:bg-gray-900/50 transition-all duration-200 py-3 px-4 rounded-lg font-medium text-base"
+                >
+                  Technology
+                </button>
               </div>
-            </div>
+            </motion.div>
           )}
         </nav>
 
@@ -318,6 +376,172 @@ const LandingPage = () => {
             </div>
           </div>
         </motion.div> */}
+      </div>
+
+      {/* Expertise Section */}
+      <div id="expertise" className="min-h-screen bg-black text-white relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-gradient-to-l from-orange-500/15 via-orange-600/8 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute inset-0 opacity-[0.02]"
+               style={{backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '50px 50px'}}>
+          </div>
+        </div>
+
+        <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24">
+          <div className="max-w-8xl mx-auto">
+            {/* Header Section */}
+            <div className="text-center mb-12 sm:mb-16 md:mb-20">
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-orange-500/10 to-orange-600/10 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8 border border-orange-500/20">
+                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                <span className="text-orange-400 font-medium text-xs sm:text-sm uppercase tracking-wider">Enterprise Solutions</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 sm:mb-8 leading-tight px-2">
+                Our <span className="text-orange-500">Expertise</span>
+              </h1>
+
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4">
+                From mobile-first applications to secure APIs and intuitive UX/UI, we deliver digital experiences
+                that engage and perform.
+              </p>
+            </div>
+
+            {/* Expertise Grid - Show 4 initially */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
+              <ExpertiseCard
+                id="01"
+                title="Enterprise Application Development"
+                subtitle="Scalable Solutions"
+                description="Design and build scalable enterprise-grade applications with seamless integration to ERP, CRM, and legacy systems."
+                features={[
+                  "Scalable enterprise-grade applications",
+                  "ERP, CRM, and legacy system integration",
+                  "Performance, security, and regulatory compliance"
+                ]}
+                color="orange"
+                icon={Briefcase}
+              />
+              <ExpertiseCard
+                id="02"
+                title="SaaS & Cloud-Native Platforms"
+                subtitle="Modern Infrastructure"
+                description="End-to-end SaaS product design with multi-tenant architectures and elastic scaling capabilities."
+                features={[
+                  "End-to-end SaaS product design and deployment",
+                  "Multi-tenant architectures with elastic scaling",
+                  "Cloud-native development on AWS, Azure, and GCP"
+                ]}
+                color="slate"
+                icon={Cloud}
+              />
+              <ExpertiseCard
+                id="03"
+                title="AI & ML Engineering"
+                subtitle="Intelligent Automation"
+                description="Custom ML models for prediction, classification, and automation with generative AI integrations."
+                features={[
+                  "Custom ML models for prediction and classification",
+                  "Generative AI integrations for content and chat",
+                  "Deployment pipeline for continuous improvement"
+                ]}
+                color="orange"
+                icon={Bot}
+              />
+              <ExpertiseCard
+                id="04"
+                title="Data Engineering & Analytics"
+                subtitle="Insights & Intelligence"
+                description="Big data pipelines with real-time analytics and comprehensive data visualization solutions."
+                features={[
+                  "Big data pipelines (Hadoop, Databricks, Snowflake)",
+                  "Real-time analytics and data visualization",
+                  "Data integration from siloed enterprise systems"
+                ]}
+                color="slate"
+                icon={BarChart3}
+              />
+
+              {/* Expandable Content */}
+              {expandedSections.expertise && (
+                <>
+                  <ExpertiseCard
+                    id="05"
+                    title="Mobile & Cross-Platform Solutions"
+                    subtitle="Native Excellence"
+                    description="Native Android/iOS development with secure frameworks and cross-platform capabilities."
+                    features={[
+                      "Native Android/iOS development with secure frameworks",
+                      "Cross-platform apps with React Native / Flutter",
+                      "Mobile-first enterprise workflows with offline capability"
+                    ]}
+                    color="orange"
+                    icon={Smartphone}
+                  />
+                  <ExpertiseCard
+                    id="06"
+                    title="API Development & System Integration"
+                    subtitle="Seamless Connectivity"
+                    description="Secure REST, GraphQL, and gRPC APIs with comprehensive third-party service integration."
+                    features={[
+                      "Secure REST, GraphQL, and gRPC APIs",
+                      "Third-party service integration (payments, identity, messaging)",
+                      "Microservices architecture for modularity and scalability"
+                    ]}
+                    color="slate"
+                    icon={Link}
+                  />
+                  <ExpertiseCard
+                    id="07"
+                    title="UX/UI Engineering"
+                    subtitle="Human-Centered Design"
+                    description="Human-centered design for intuitive digital experiences with accessibility-driven development."
+                    features={[
+                      "Human-centered design for intuitive digital experiences",
+                      "Wireframes, prototypes, and design systems aligned with brand",
+                      "Accessibility-driven development (WCAG compliance)"
+                    ]}
+                    color="orange"
+                    icon={Palette}
+                  />
+                  <ExpertiseCard
+                    id="08"
+                    title="Quality Assurance & DevOps"
+                    subtitle="Reliable Delivery"
+                    description="Automated testing frameworks with continuous integration and proactive monitoring systems."
+                    features={[
+                      "Automated testing frameworks for speed and reliability",
+                      "Continuous Integration / Continuous Deployment pipelines",
+                      "Proactive monitoring, logging, and incident response"
+                    ]}
+                    color="slate"
+                    icon={Zap}
+                  />
+                </>
+              )}
+            </div>
+
+            {/* Read More Button */}
+            <div className="text-center mt-4 sm:mt-0">
+              <button
+                onClick={() => toggleSection('expertise')}
+                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-orange-500/10"
+              >
+                {expandedSections.expertise ? (
+                  <>
+                    <span className="text-sm sm:text-base font-medium">Show Less</span>
+                    <ChevronUp size={18} className="sm:w-5 sm:h-5" />
+                  </>
+                ) : (
+                  <>
+                    <span className="text-sm sm:text-base font-medium">Read More</span>
+                    <ChevronDown size={18} className="sm:w-5 sm:h-5" />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* About Section */}
@@ -443,101 +667,6 @@ const LandingPage = () => {
                   );
                 })}
               </motion.div>
-            </div>
-
-            {/* What We Do Section */}
-            {expandedSections.about && (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="mb-20"
-              >
-                <div className="text-center mb-16">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                    What We <span className="text-orange-500">Do</span>
-                  </h2>
-                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Our comprehensive AI service portfolio transforms businesses through cutting-edge artificial intelligence solutions and strategic implementation.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[
-                    { icon: Shield, title: "AI Governance and Responsible AI", description: "Design trustworthy AI with transparency, fairness, and compliance." },
-                    { icon: Settings, title: "AI Platform Engineering", description: "Build, scale, and manage enterprise-grade AI platforms and MLOps pipelines." },
-                    { icon: Brain, title: "AI Strategy and Consulting", description: "Align your business goals with a tailored AI roadmap and operating model." },
-                    { icon: BookOpen, title: "AI Training", description: "Tailored training programs for business leaders, technical teams, and non-technical staff." },
-                    { icon: Camera, title: "Computer Vision Solutions", description: "Automate visual tasks like quality control, surveillance, and content moderation." },
-                    { icon: Code, title: "Custom AI Solution Development", description: "Build scalable, production-grade AI models and applications." },
-                    { icon: Zap, title: "Generative AI and LLM Integration", description: "Leverage large language models for content creation, automation, and decision support." },
-                    { icon: Cpu, title: "Machine Learning & Deep Learning Models", description: "Create predictive, generative, and adaptive learning systems." },
-                    { icon: MessageSquare, title: "Natural Language Processing (NLP)", description: "Understand, summarize, translate, and generate human language at scale." }
-                  ].map((service, index) => {
-                    const ServiceIcon = service.icon;
-                    const isOrange = index % 2 === 0;
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                      >
-                        <GlareHover
-                          width="100%"
-                          height="100%"
-                          background="#000000"
-                          borderRadius="12px"
-                          borderColor="rgb(31, 41, 55)"
-                          glareColor="#f97316"
-                          glareOpacity={0.35}
-                          glareAngle={-45}
-                          glareSize={400}
-                          transitionDuration={1200}
-                          playOnce={false}
-                          className="backdrop-blur-sm hover:border-orange-500/40 transition-all duration-300"
-                          style={{
-                            padding: '1.5rem'
-                          }}
-                        >
-                          <div className="flex flex-col h-full">
-                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 border ${
-                              isOrange
-                                ? 'bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-500/20'
-                                : 'bg-gradient-to-br from-gray-700/20 to-gray-800/10 border-gray-700/20'
-                            }`}>
-                              <ServiceIcon className={`w-6 h-6 ${isOrange ? 'text-orange-500' : 'text-gray-400'}`} />
-                            </div>
-                            <h3 className="text-base font-bold text-white mb-2">{service.title}</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
-                          </div>
-                        </GlareHover>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Read More Button */}
-            <div className="text-center">
-              <button
-                onClick={() => toggleSection('about')}
-                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200"
-              >
-                {expandedSections.about ? (
-                  <>
-                    <span>Show Less</span>
-                    <ChevronUp size={20} />
-                  </>
-                ) : (
-                  <>
-                    <span>Read More</span>
-                    <ChevronDown size={20} />
-                  </>
-                )}
-              </button>
             </div>
           </div>
         </div>
@@ -666,172 +795,6 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Expertise Section */}
-      <div id="expertise" className="min-h-screen bg-black text-white relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-[600px] h-full bg-gradient-to-l from-orange-500/15 via-orange-600/8 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-500/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute inset-0 opacity-[0.02]"
-               style={{backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '50px 50px'}}>
-          </div>
-        </div>
-
-        <div className="relative z-10 px-8 py-24">
-          <div className="max-w-8xl mx-auto">
-            {/* Header Section */}
-            <div className="text-center mb-20">
-              <div className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500/10 to-orange-600/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-orange-500/20">
-                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                <span className="text-orange-400 font-medium text-sm uppercase tracking-wider">Enterprise Solutions</span>
-              </div>
-
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                Our <span className="text-orange-500">Expertise</span>
-              </h1>
-
-              <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                From mobile-first applications to secure APIs and intuitive UX/UI, we deliver digital experiences
-                that engage and perform.
-              </p>
-            </div>
-
-            {/* Expertise Grid - Show 4 initially */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-16">
-              <ExpertiseCard
-                id="01"
-                title="Enterprise Application Development"
-                subtitle="Scalable Solutions"
-                description="Design and build scalable enterprise-grade applications with seamless integration to ERP, CRM, and legacy systems."
-                features={[
-                  "Scalable enterprise-grade applications",
-                  "ERP, CRM, and legacy system integration",
-                  "Performance, security, and regulatory compliance"
-                ]}
-                color="orange"
-                icon={Briefcase}
-              />
-              <ExpertiseCard
-                id="02"
-                title="SaaS & Cloud-Native Platforms"
-                subtitle="Modern Infrastructure"
-                description="End-to-end SaaS product design with multi-tenant architectures and elastic scaling capabilities."
-                features={[
-                  "End-to-end SaaS product design and deployment",
-                  "Multi-tenant architectures with elastic scaling",
-                  "Cloud-native development on AWS, Azure, and GCP"
-                ]}
-                color="slate"
-                icon={Cloud}
-              />
-              <ExpertiseCard
-                id="03"
-                title="AI & ML Engineering"
-                subtitle="Intelligent Automation"
-                description="Custom ML models for prediction, classification, and automation with generative AI integrations."
-                features={[
-                  "Custom ML models for prediction and classification",
-                  "Generative AI integrations for content and chat",
-                  "Deployment pipeline for continuous improvement"
-                ]}
-                color="orange"
-                icon={Bot}
-              />
-              <ExpertiseCard
-                id="04"
-                title="Data Engineering & Analytics"
-                subtitle="Insights & Intelligence"
-                description="Big data pipelines with real-time analytics and comprehensive data visualization solutions."
-                features={[
-                  "Big data pipelines (Hadoop, Databricks, Snowflake)",
-                  "Real-time analytics and data visualization",
-                  "Data integration from siloed enterprise systems"
-                ]}
-                color="slate"
-                icon={BarChart3}
-              />
-
-              {/* Expandable Content */}
-              {expandedSections.expertise && (
-                <>
-                  <ExpertiseCard
-                    id="05"
-                    title="Mobile & Cross-Platform Solutions"
-                    subtitle="Native Excellence"
-                    description="Native Android/iOS development with secure frameworks and cross-platform capabilities."
-                    features={[
-                      "Native Android/iOS development with secure frameworks",
-                      "Cross-platform apps with React Native / Flutter",
-                      "Mobile-first enterprise workflows with offline capability"
-                    ]}
-                    color="orange"
-                    icon={Smartphone}
-                  />
-                  <ExpertiseCard
-                    id="06"
-                    title="API Development & System Integration"
-                    subtitle="Seamless Connectivity"
-                    description="Secure REST, GraphQL, and gRPC APIs with comprehensive third-party service integration."
-                    features={[
-                      "Secure REST, GraphQL, and gRPC APIs",
-                      "Third-party service integration (payments, identity, messaging)",
-                      "Microservices architecture for modularity and scalability"
-                    ]}
-                    color="slate"
-                    icon={Link}
-                  />
-                  <ExpertiseCard
-                    id="07"
-                    title="UX/UI Engineering"
-                    subtitle="Human-Centered Design"
-                    description="Human-centered design for intuitive digital experiences with accessibility-driven development."
-                    features={[
-                      "Human-centered design for intuitive digital experiences",
-                      "Wireframes, prototypes, and design systems aligned with brand",
-                      "Accessibility-driven development (WCAG compliance)"
-                    ]}
-                    color="orange"
-                    icon={Palette}
-                  />
-                  <ExpertiseCard
-                    id="08"
-                    title="Quality Assurance & DevOps"
-                    subtitle="Reliable Delivery"
-                    description="Automated testing frameworks with continuous integration and proactive monitoring systems."
-                    features={[
-                      "Automated testing frameworks for speed and reliability",
-                      "Continuous Integration / Continuous Deployment pipelines",
-                      "Proactive monitoring, logging, and incident response"
-                    ]}
-                    color="slate"
-                    icon={Zap}
-                  />
-                </>
-              )}
-            </div>
-
-            {/* Read More Button */}
-            <div className="text-center">
-              <button
-                onClick={() => toggleSection('expertise')}
-                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200"
-              >
-                {expandedSections.expertise ? (
-                  <>
-                    <span>Show Less</span>
-                    <ChevronUp size={20} />
-                  </>
-                ) : (
-                  <>
-                    <span>Read More</span>
-                    <ChevronDown size={20} />
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Technology Section */}
       <div id="technology" className="min-h-screen bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0">
@@ -849,24 +812,24 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="relative z-10 px-8 py-24">
+        <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24">
           <div className="max-w-7xl mx-auto">
             {/* Header Section */}
-            <div className="mb-20">
-              <div className="flex flex-col lg:flex-row items-start lg:items-end gap-12">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex flex-col lg:flex-row items-start lg:items-end gap-8 sm:gap-10 lg:gap-12">
                 <div className="lg:w-2/3">
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-20 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
-                    <span className="text-orange-400 font-medium text-sm uppercase tracking-wider">Technology Stack</span>
+                  <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    <div className="w-12 sm:w-16 md:w-20 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                    <span className="text-orange-400 font-medium text-xs sm:text-sm uppercase tracking-wider">Technology Stack</span>
                   </div>
 
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 sm:mb-8">
                     Our <span className="text-orange-500">Technologies</span>
                   </h1>
                 </div>
 
                 <div className="lg:w-1/3">
-                  <p className="text-xl text-gray-300 leading-relaxed">
+                  <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
                     Our technology stack combines the power of AI, machine learning, and generative AI with the
                     scalability of big data and cloud platforms.
                   </p>
@@ -875,8 +838,8 @@ const LandingPage = () => {
             </div>
 
             {/* Technology Grid - Show 4 initially */}
-            <div className="space-y-8">
-              <div className="flex flex-col lg:flex-row gap-8">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
                 <TechCard
                   title="Artificial Intelligence & Agentic AI"
                   description="Intelligent systems with reasoning, synthesis, and decision-making. Agent-based AI workflows for enterprises."
@@ -998,21 +961,86 @@ const LandingPage = () => {
               )}
             </div>
 
+            {/* Technology Logos Grid */}
+            <div className="mt-24">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Technologies <span className="text-orange-500">We Use</span>
+                </h2>
+                <p className="text-gray-400 max-w-2xl mx-auto">
+                  Our comprehensive technology stack powers enterprise-grade solutions
+                </p>
+              </div>
+
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 md:gap-8">
+                {[
+                  { name: 'React', logo: 'https://cdn.simpleicons.org/react/61DAFB' },
+                  { name: 'Python', logo: 'https://cdn.simpleicons.org/python/3776AB' },
+                  { name: 'TensorFlow', logo: 'https://cdn.simpleicons.org/tensorflow/FF6F00' },
+                  { name: 'PyTorch', logo: 'https://cdn.simpleicons.org/pytorch/EE4C2C' },
+                  { name: 'AWS', logo: 'https://static.cdnlogo.com/logos/a/88/amazon-web-services.svg' },
+                  { name: 'Azure', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Microsoft_Azure_Logo.svg' },
+                  { name: 'GCP', logo: 'https://cdn.simpleicons.org/googlecloud/4285F4' },
+                  { name: 'Docker', logo: 'https://cdn.simpleicons.org/docker/2496ED' },
+                  { name: 'Kubernetes', logo: 'https://cdn.simpleicons.org/kubernetes/326CE5' },
+                  { name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+                  { name: 'MongoDB', logo: 'https://cdn.simpleicons.org/mongodb/47A248' },
+                  { name: 'PostgreSQL', logo: 'https://cdn.simpleicons.org/postgresql/4169E1' },
+                  { name: 'Redis', logo: 'https://cdn.simpleicons.org/redis/DC382D' },
+                  { name: 'Kafka', logo: 'https://cdn.simpleicons.org/apachekafka/231F20' },
+                  { name: 'Spark', logo: 'https://cdn.simpleicons.org/apachespark/E25A1C' },
+                  { name: 'Hadoop', logo: 'https://cdn.simpleicons.org/apachehadoop/66CCFF' },
+                  { name: 'Snowflake', logo: 'https://cdn.simpleicons.org/snowflake/29B5E8' },
+                  { name: 'Databricks', logo: 'https://cdn.simpleicons.org/databricks/FF3621' },
+                  { name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs/000000' },
+                  { name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript/3178C6' },
+                  { name: 'GraphQL', logo: 'https://cdn.simpleicons.org/graphql/E10098' },
+                  { name: 'FastAPI', logo: 'https://cdn.simpleicons.org/fastapi/009688' },
+                  { name: 'Flutter', logo: 'https://cdn.simpleicons.org/flutter/02569B' },
+                  { name: 'OpenAI', logo: 'https://cdn.simpleicons.org/openai/412991' },
+                  { name: 'Terraform', logo: 'https://cdn.simpleicons.org/terraform/7B42BC' },
+                  { name: 'Jenkins', logo: 'https://cdn.simpleicons.org/jenkins/D24939' },
+                  { name: 'GitHub', logo: 'https://cdn.simpleicons.org/github/181717' },
+                  { name: 'GitLab', logo: 'https://cdn.simpleicons.org/gitlab/FC6D26' },
+                  { name: 'Figma', logo: 'https://cdn.simpleicons.org/figma/F24E1E' },
+                  { name: 'Tableau', logo: 'https://cdn.simpleicons.org/tableau/E97627' },
+                  { name: 'Salesforce', logo: 'https://cdn.simpleicons.org/salesforce/00A1E0' },
+                  { name: 'SAP', logo: 'https://cdn.simpleicons.org/sap/0FAAFF' }
+                ].map((tech, i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-800 hover:border-orange-500/30 transition-all duration-300 group"
+                  >
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-all duration-300">
+                      <img
+                        src={tech.logo}
+                        alt={tech.name}
+                        className="w-full h-full object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                    </div>
+                    <span className="text-xs sm:text-sm text-gray-400 group-hover:text-white transition-colors duration-300 text-center font-medium">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Read More Button */}
-            <div className="text-center mt-16">
+            <div className="text-center mt-12 sm:mt-16">
               <button
                 onClick={() => toggleSection('technology')}
-                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200"
+                className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-orange-500/10"
               >
                 {expandedSections.technology ? (
                   <>
-                    <span>Show Less</span>
-                    <ChevronUp size={20} />
+                    <span className="text-sm sm:text-base font-medium">Show Less</span>
+                    <ChevronUp size={18} className="sm:w-5 sm:h-5" />
                   </>
                 ) : (
                   <>
-                    <span>Read More</span>
-                    <ChevronDown size={20} />
+                    <span className="text-sm sm:text-base font-medium">Read More</span>
+                    <ChevronDown size={18} className="sm:w-5 sm:h-5" />
                   </>
                 )}
               </button>
