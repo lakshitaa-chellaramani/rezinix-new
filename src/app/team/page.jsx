@@ -15,7 +15,7 @@ const TeamPage = () => {
     {
       name: "Sachin Jain",
       title: "Director",
-      image: "https://rezinix.ai/images/2025-05-Sachin-Jain-1.webp",
+      image: "https://media.licdn.com/dms/image/v2/D5603AQHemyBeqcYCaA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1686235409267?e=1762387200&v=beta&t=LMgovuVCv6mRKKZs4LQhfBkRKVDHCb_ojuxWNXrDsz4",
       location: "Boston, MA / Mumbai, India",
       experience: "15+ years",
       linkedin: "https://www.linkedin.com/in/sachingjain/?originalSubdomain=in",
